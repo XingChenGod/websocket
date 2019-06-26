@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+</head>
+<body>
+客户端 <button id="btn">给服务器发送数据</button>
+<script>
+    // 和服务器建立连接
+    const socket = io('http://localhost:3000');
+    const oBtn = document.getElementById('btn');
+
+    oBtn.onclick = function () {
+        socket.emit('addCart', {
+            client: '客户端数据'
+        });
+    };
+
+    // 监听服务器数据
+    socket.on('to-client', function (data) {
+        console.log(data);
+    })
+
+    socket.on('allNews', function (data) {
+        console.log(data);
+    })
+
+</script>
+</body>
+</html>
